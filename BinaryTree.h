@@ -1,17 +1,15 @@
-//
-// Created by jimch on 18.04.2022.
-//
+
 
 #ifndef LAB3_BINARYTREE_H
 #define LAB3_BINARYTREE_H
-#include <string>
+#include <iostream>
 
 enum class Field
 {
     WEIGHT,
     CODE
 };
-
+//linux
 struct Node
 {
     std::string surname;
@@ -22,7 +20,6 @@ struct Node
     bool operator>(Node& rhs)const {return this->surname>rhs.surname; }
     bool operator<(Node& rhs)const {return this->surname<rhs.surname; }
 };
-
 class BinaryTree {
 private:
     Node* root;
@@ -35,6 +32,8 @@ private:
     void delete_left_subtree(Node* leaf);
     void delete_right_subtree(Node* leaf);
     Node* move_leaf(Node* origin, Node* array);
+    void write(Node* leaf, int space, std::ostream& out);
+
 public:
     BinaryTree();
     ~BinaryTree();
@@ -55,6 +54,8 @@ public:
     void delete_left_subtree();
     void delete_right_subtree();
     void move_tree(BinaryTree& other);
+    void read_file(std::istream& in);
+    void write_file(std::ostream& out);
 };
 
 

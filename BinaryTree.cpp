@@ -47,7 +47,7 @@ bool BinaryTree::insert(Node&& new_node) {
         }
     }
     ++count;
-    return false;
+    return true;
 }
 
 BinaryTree::~BinaryTree() {
@@ -364,8 +364,8 @@ void BinaryTree::move_tree(BinaryTree &other) {
         {
             other.root = root;
         }
-        other.count=count;
         root = nullptr;
+        other.count=count;
         count = 0;
     }
 }
@@ -421,5 +421,36 @@ bool BinaryTree::insert(Node &&new_node, bool (*comp)(Node &, Node&)) {
     }
     ++count;
     return false;
+}
+
+void BinaryTree::read_file(std::istream& in) {
+    while(!in.eof())
+    {
+        std::string surname;
+        in >> surname;
+        int ticket;
+        in >> ticket;
+        double weight;
+        in >> weight;
+        insert({surname,ticket, weight});
+    }
+}
+
+void BinaryTree::write_file(std::ostream &out) {
+    write(root,0,out);
+}
+
+void BinaryTree::write(Node* leaf, int space, std::ostream& out) {
+    if(leaf != nullptr)
+    {
+        space += 10;
+        print(leaf->right,space);
+        out << std::endl;
+        for (int i = 10; i < space; ++i) {
+            out << " ";
+        }
+        out <<leaf->surname << "|" << leaf->ticket_code << "|" << leaf->luggage_weight << std::endl;
+        print(leaf->left,space);
+    }
 }
 
